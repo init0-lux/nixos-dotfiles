@@ -1,0 +1,5 @@
+require("lualine").setup()
+require("gitsigns").setup()
+require("which-key").setup()
+require("nvim-autopairs").setup()
+require("Comment").setup()

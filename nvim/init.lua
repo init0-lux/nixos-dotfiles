@@ -1,0 +1,10 @@
+print("OPTIONS LOADED")
+require("core.options")
+require("core.keymaps")
+
+require("plugins.lsp")
+require("plugins.cmp")
+require("plugins.treesitter")
+require("plugins.telescope")
+require("plugins.copilot")
+require("plugins.ui")
