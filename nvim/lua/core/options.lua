@@ -2,7 +2,7 @@ local opt = vim.opt
 
 opt.number = true
 opt.relativenumber = true
-opt.wrap = false
+opt.wrap = true
 opt.ignorecase = true
 opt.smartcase = true
 opt.tabstop = 4

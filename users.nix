@@ -33,7 +33,6 @@
     };
   };
   programs.kdeconnect.enable = true;
-  programs.adb.enable = true;
   programs.wireshark.enable = true;
   programs.git.enable = true;
   programs.direnv.enable = true;

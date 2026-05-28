@@ -1,65 +1,74 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  antigravity-nix,
+  ...
+}:
 
 {
-    home.stateVersion = "24.11";
-	programs.neovim = {
-		enable = true;
-		defaultEditor = true;
-		viAlias = true;
-		vimAlias = true;
+  home.stateVersion = "25.11";
 
-		plugins = with pkgs.vimPlugins; [
-			# Core LSP + Completion
-			nvim-lspconfig
-			nvim-cmp
-			cmp-nvim-lsp
-			cmp-buffer
-			cmp-path
-			luasnip
-			friendly-snippets
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
 
-			# Syntax
-			nvim-treesitter.withAllGrammars
+    plugins = with pkgs.vimPlugins; [
+      # Core LSP + Completion
+      nvim-lspconfig
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      luasnip
+      friendly-snippets
 
-			# Telescope
-			telescope-nvim
-			plenary-nvim
+      # Syntax
+      nvim-treesitter.withAllGrammars
 
-			# UI
-			lualine-nvim
-			gitsigns-nvim
-			which-key-nvim
-			nvim-autopairs
-			comment-nvim
+      # Telescope
+      telescope-nvim
+      plenary-nvim
 
-			# Git
-			vim-fugitive
+      # UI
+      lualine-nvim
+      gitsigns-nvim
+      which-key-nvim
+      nvim-autopairs
+      comment-nvim
 
-			# Nix
-			vim-nix
+      # Git
+      vim-fugitive
 
-                        # CoPilot
-                        copilot-lua
-                        copilot-cmp
-                        CopilotChat-nvim
-		];
-	};
+      # Nix
+      vim-nix
 
-	xdg.configFile."nvim".source = ./nvim;
+      # CoPilot
+      copilot-lua
+      copilot-cmp
+      CopilotChat-nvim
+    ];
+  };
 
-	home.packages = with pkgs; [
-		# Required binaries
-		ripgrep
-		fd
+  xdg.configFile."nvim".source = ./nvim;
 
-		# Language servers
-		gopls
-		rust-analyzer
-		typescript-language-server
-		eslint
-		nil
-		dart
-		nodejs
-		go
-	];
+  home.packages = with pkgs; [
+    # Required binaries
+    ripgrep
+    fd
+
+    # Language servers
+    gopls
+    rust-analyzer
+    typescript-language-server
+    eslint
+    nil
+    dart
+    nodejs
+    go
+
+    # Custom Antigravity packages
+    antigravity-nix.packages.${pkgs.system}.default
+  ];
 }
