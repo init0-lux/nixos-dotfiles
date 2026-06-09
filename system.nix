@@ -1,6 +1,17 @@
 { config, pkgs, ... }:
 
 {
+  # ── nix-ld (dynamic binaries for Android tooling etc.) ────────────
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    openssl
+  ];
+
+  # Make nix-ld libs available to all processes (needed for NDK clang etc.)
+  environment.sessionVariables.LD_LIBRARY_PATH = [ "/run/current-system/sw/share/nix-ld/lib" ];
+
   # ── Networking ──────────────────────────────────────────────────
   networking.hostName = "zapp";
   networking.firewall.allowedTCPPorts = [
@@ -40,7 +51,11 @@
     timeout = 5;
     efi.canTouchEfiVariables = true;
   };
-  boot.kernelParams = [ "mem_sleep_default=deep" ];
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+    "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+  ];
   boot.supportedFilesystems = [ "ntfs" ];
   boot.initrd.network.ssh = {
     port = 2219;
@@ -193,4 +208,8 @@
     "nix-command"
     "flakes"
   ];
+
+  systemd.services.nvidia-suspend.enable = true;
+  systemd.services.nvidia-resume.enable = true;
+  systemd.services.nvidia-hibernate.enable = true;
 }

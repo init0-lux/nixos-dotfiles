@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 
 {
   imports = [
@@ -52,7 +52,7 @@
     gdb
     postman
     vscode
-    zed-editor
+    unstable.zed-editor
     rstudio
     arduino-ide
     arduino-cli
@@ -64,6 +64,7 @@
     gotools
     jdk
     jre8
+    basedpyright
 
     # Media & Graphics
     vlc

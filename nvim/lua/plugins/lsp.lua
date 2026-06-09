@@ -30,6 +30,12 @@ vim.lsp.config("dartls", {
 })
 vim.lsp.enable("dartls")
 
+-- Python
+vim.lsp.config("basedpyright", {
+    capabilities = capabilities,
+})
+vim.lsp.enable("basedpyright")
+
 -- Format on save
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function()
